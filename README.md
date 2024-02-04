@@ -5,6 +5,8 @@
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/simple-and-deep-graph-convolutional-networks/node-classification-on-ppi)](https://paperswithcode.com/sota/node-classification-on-ppi?p=simple-and-deep-graph-convolutional-networks)
 
 This repository contains a PyTorch implementation of "Simple and Deep Graph Convolutional Networks".(https://arxiv.org/abs/2007.02133)
+This is the code of paper named "Simple and Deep Graph Convolutional Networks".
+这是名为“Simple and Deep Graph Convolutional Networks”的论文代码
 
 ## Dependencies
 - CUDA 10.1
