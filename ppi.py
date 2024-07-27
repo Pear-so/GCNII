@@ -45,20 +45,20 @@ train_adj,val_adj,test_adj,train_feat,val_feat,test_feat,train_labels,val_labels
 checkpt_file = 'pretrained/'+uuid.uuid4().hex+'.pt'
 print(cudaid,checkpt_file)
 
-model = GCNIIppi(nfeat=train_feat[0].shape[1],
+model = GCNIIppi(nfeat=train_feat[0].shape[1],#输入特征数量由训练特征矩阵 train_feat 的第二维度决定
                     nlayers=args.layer,
                     nhidden=args.hidden,
-                    nclass=train_labels[0].shape[1],
+                    nclass=train_labels[0].shape[1],#模型的输出类别数，由训练标签矩阵 train_labels 的第二维度决定
                     dropout=args.dropout,
                     lamda = args.lamda, 
                     alpha=args.alpha,
-                    variant=args.variant).to(device)
+                    variant=args.variant).to(device)#指示是否使用模型的变体，GCNII*
 
 optimizer = optim.Adam(model.parameters(), lr=args.lr,
                            weight_decay=args.wd)
 
 
-loss_fcn = torch.nn.BCELoss()
+loss_fcn = torch.nn.BCELoss()#定义了二元交叉熵损失函数（BCELoss），这通常用于二分类问题
 # adapted from DGL
 def evaluate(feats, model, idx ,subgraph, labels, loss_fcn):
     model.eval()
