@@ -67,7 +67,7 @@ class GCNII(nn.Module):
         return F.log_softmax(layer_inner, dim=1)
 
 class GCNIIppi(nn.Module):
-    def __init__(self, nfeat, nlayers,nhidden, nclass, dropout, lamda, alpha,variant):
+    def __init__(self, nfeat, nlayers,nhidden, nclass, dropout, lamda, alpha,variant):#输入特征数量，图卷积层数量，每层的隐藏单元数，输出类别数量，dropout比率，超参，超参数，指示是否使用变体GCNII*
         super(GCNIIppi, self).__init__()
         self.convs = nn.ModuleList()
         for _ in range(nlayers):
