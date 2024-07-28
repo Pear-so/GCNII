@@ -13,7 +13,7 @@ class GraphConvolution(nn.Module):
         if self.variant:
             self.in_features = 2*in_features 
         else:
-            self.in_features = in_features
+            self.in_features = in_features###
 
         self.out_features = out_features
         self.residual = residual
