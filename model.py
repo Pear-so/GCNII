@@ -24,17 +24,17 @@ class GraphConvolution(nn.Module):
         stdv = 1. / math.sqrt(self.out_features)
         self.weight.data.uniform_(-stdv, stdv)
 
-    def forward(self, input, adj , h0 , lamda, alpha, l):
-        theta = math.log(lamda/l+1)
-        hi = torch.spmm(adj, input)
+    def forward(self, input, adj , h0 , lamda, alpha, l):#输入特征、邻接矩阵、上一层的节点特征或初始特征、控制图卷积的调整因子、平衡邻居特征与自特征的参数、曾索引
+        theta = math.log(lamda/l+1)#用于调整图卷积的权重
+        hi = torch.spmm(adj, input)#邻接矩阵与输入特征的乘积，得到节点的邻居特征聚合
         if self.variant:
             support = torch.cat([hi,h0],1)
             r = (1-alpha)*hi+alpha*h0
         else:
             support = (1-alpha)*hi+alpha*h0
-            r = support
+            r = support#支持向量
         output = theta*torch.mm(support, self.weight)+(1-theta)*r
-        if self.residual:
+        if self.residual:#如果 self.residual 为 True，则将原始输入特征 input 加到输出上，实现残差连接
             output = output+input
         return output
 
